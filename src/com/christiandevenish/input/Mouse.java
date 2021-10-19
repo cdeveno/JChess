@@ -3,7 +3,9 @@ package com.christiandevenish.input;
 import com.christiandevenish.board.Board;
 import com.christiandevenish.board.BoardUtils;
 import com.christiandevenish.board.Tile;
+import com.christiandevenish.game.Game;
 import com.christiandevenish.game.Move;
+import com.christiandevenish.pieces.Pawn;
 import com.christiandevenish.pieces.Piece;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -27,9 +29,15 @@ public class Mouse implements EventHandler<MouseEvent> {
             selectedPiece.renderWithMoves(board.getGc());
         } else if (selectedPiece != null) {
             if (selectedPiece.getLegalMoves().contains(new Move(selectedPiece, selectedTile))) {
-                selectedPiece.undisplayMoves(board.getGc());
-                selectedPiece.makeMove(selectedTile);
-                selectedPiece = null;
+                if (selectedPiece.getLegalMoves().get(selectedPiece.getLegalMoves().indexOf(new Move(selectedPiece, selectedTile))).getMoveType() == Move.MoveType.EN_PASSANT) {
+                    selectedPiece.undisplayMoves(board.getGc());
+                    ((Pawn) selectedPiece).makeEnPassantMove(selectedTile);
+                    selectedPiece = null;
+                } else {
+                    selectedPiece.undisplayMoves(board.getGc());
+                    selectedPiece.makeMove(selectedTile);
+                    selectedPiece = null;
+                }
             } else if (selectedTile.getPiece() != null && selectedTile.getPiece().getPlayerColor() == board.getPlayerTurn()) {
                 selectedPiece.undisplayMoves(board.getGc());
                 selectedPiece = selectedTile.getPiece();

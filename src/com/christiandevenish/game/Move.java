@@ -10,11 +10,19 @@ public class Move {
 
     private final Piece piece;
     private final Tile newTile;
+    private MoveType moveType;
 
     public enum MoveType {
         NORMAL,
         EN_PASSANT,
         ATTACK,
+        PAWN_DOUBLE_MOVE
+    }
+
+    public Move(Piece piece, Tile newTile, MoveType moveType) {
+        this.piece = piece;
+        this.newTile = newTile;
+        this.moveType = moveType;
     }
 
     public Move(Piece piece, Tile newTile) {
@@ -52,5 +60,9 @@ public class Move {
     @Override
     public int hashCode() {
         return super.hashCode() + 56;
+    }
+
+    public MoveType getMoveType() {
+        return moveType;
     }
 }

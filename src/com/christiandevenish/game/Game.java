@@ -19,8 +19,8 @@ public class Game {
 
         this.board = board;
 
-        whitePlayer = new Player(PlayerColor.WHITE, board);
-        blackPlayer = new Player(PlayerColor.BLACK, board);
+        whitePlayer = new Player(PlayerColor.WHITE, board, this);
+        blackPlayer = new Player(PlayerColor.BLACK, board, this);
 
         whitePlayer.renderPieces(board.getGc());
         blackPlayer.renderPieces(board.getGc());
@@ -37,5 +37,9 @@ public class Game {
 
     public void addMove(Move move) {
         moveList.add(move);
+    }
+
+    public List<Move> getMoveList() {
+        return moveList;
     }
 }

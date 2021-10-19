@@ -3,6 +3,7 @@ package com.christiandevenish.pieces;
 import com.christiandevenish.board.Board;
 import com.christiandevenish.board.BoardUtils;
 import com.christiandevenish.board.Tile;
+import com.christiandevenish.game.Game;
 import com.christiandevenish.game.Move;
 import com.christiandevenish.game.PlayerColor;
 import javafx.scene.canvas.GraphicsContext;
@@ -17,12 +18,14 @@ public abstract class Piece {
 
     protected final Sprite sprite;
 
+    protected Game game;
     protected ArrayList<Move> legalMoves;
 
-    public Piece(Tile tile, Board board, PlayerColor playerColor) {
+    public Piece(Tile tile, Board board, PlayerColor playerColor, Game game) {
         this.tile = tile;
         this.board = board;
         this.playerColor = playerColor;
+        this.game = game;
 
         if (playerColor == PlayerColor.WHITE) {
             if (this instanceof Bishop) {
@@ -107,6 +110,7 @@ public abstract class Piece {
         setPosition(newTile);
         newTile.setPiece(this);
         render(board.getGc());
+        game.addMove(getLegalMoves().get(getLegalMoves().indexOf(new Move(this, newTile))));
         for (Tile[] row : board.getBoard()) {
             for (Tile tile : row) {
                 if (tile.getPiece() != null) {
