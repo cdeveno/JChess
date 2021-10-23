@@ -16,7 +16,75 @@ public class Knight extends Piece {
 
     @Override
     public void calculateLegalMoves() {
-        this.legalMoves = new ArrayList<>();
+        ArrayList<Move> moves = new ArrayList<>();
+
+        if (tile.getRow() + 2 <= 8) {
+            if (tile.getColumn() + 1 <= 'h') {
+                if (board.getTile((char) (tile.getColumn() + 1), tile.getRow() + 2).getPiece() == null) {
+                    moves.add(new Move(this, board.getTile((char) (tile.getColumn() + 1), tile.getRow() + 2), Move.MoveType.NORMAL));
+                } else if (board.getTile((char) (tile.getColumn() + 1), tile.getRow() + 2).getPiece().getPlayerColor() != getPlayerColor()) {
+                    moves.add(new Move(this, board.getTile((char) (tile.getColumn() + 1), tile.getRow() + 2), Move.MoveType.ATTACK));
+                }
+            }
+            if (tile.getColumn() - 1 >= 'a') {
+                if (board.getTile((char) (tile.getColumn() - 1), tile.getRow() + 2).getPiece() == null) {
+                    moves.add(new Move(this, board.getTile((char) (tile.getColumn() - 1), tile.getRow() + 2), Move.MoveType.NORMAL));
+                } else if (board.getTile((char) (tile.getColumn() - 1), tile.getRow() + 2).getPiece().getPlayerColor() != getPlayerColor()) {
+                    moves.add(new Move(this, board.getTile((char) (tile.getColumn() - 1), tile.getRow() + 2), Move.MoveType.ATTACK));
+                }
+            }
+        }
+        if (tile.getRow() - 2 >= 1) {
+            if (tile.getColumn() + 1 <= 'h') {
+                if (board.getTile((char) (tile.getColumn() + 1), tile.getRow() - 2).getPiece() == null) {
+                    moves.add(new Move(this, board.getTile((char) (tile.getColumn() + 1), tile.getRow() - 2), Move.MoveType.NORMAL));
+                } else if (board.getTile((char) (tile.getColumn() + 1), tile.getRow() - 2).getPiece().getPlayerColor() != getPlayerColor()) {
+                    moves.add(new Move(this, board.getTile((char) (tile.getColumn() + 1), tile.getRow() - 2), Move.MoveType.ATTACK));
+                }
+            }
+            if (tile.getColumn() - 1 >= 'a') {
+                if (board.getTile((char) (tile.getColumn() - 1), tile.getRow() - 2).getPiece() == null) {
+                    moves.add(new Move(this, board.getTile((char) (tile.getColumn() - 1), tile.getRow() - 2), Move.MoveType.NORMAL));
+                } else if (board.getTile((char) (tile.getColumn() - 1), tile.getRow() - 2).getPiece().getPlayerColor() != getPlayerColor()) {
+                    moves.add(new Move(this, board.getTile((char) (tile.getColumn() - 1), tile.getRow() - 2), Move.MoveType.ATTACK));
+                }
+            }
+
+            if (tile.getColumn() + 2 <= 'h') {
+                if (tile.getRow() + 1 <= 8) {
+                    if (board.getTile((char) (tile.getColumn() + 2), tile.getRow() + 1).getPiece() == null) {
+                        moves.add(new Move(this, board.getTile((char) (tile.getColumn() + 2), tile.getRow() + 1), Move.MoveType.NORMAL));
+                    } else if (board.getTile((char) (tile.getColumn() + 2), tile.getRow() + 1).getPiece().getPlayerColor() != getPlayerColor()) {
+                        moves.add(new Move(this, board.getTile((char) (tile.getColumn() + 2), tile.getRow() + 1), Move.MoveType.ATTACK));
+                    }
+                }
+                if (tile.getRow() - 1 >= 1) {
+                    if (board.getTile((char) (tile.getColumn() + 2), tile.getRow() - 1).getPiece() == null) {
+                        moves.add(new Move(this, board.getTile((char) (tile.getColumn() + 2), tile.getRow() - 1), Move.MoveType.NORMAL));
+                    } else if (board.getTile((char) (tile.getColumn() + 2), tile.getRow() - 1).getPiece().getPlayerColor() != getPlayerColor()) {
+                        moves.add(new Move(this, board.getTile((char) (tile.getColumn() + 2), tile.getRow() - 1), Move.MoveType.ATTACK));
+                    }
+                }
+            }
+            if (tile.getColumn() - 2 >= 'a') {
+                if (tile.getRow() + 1 <= 8) {
+                    if (board.getTile((char) (tile.getColumn() - 2), tile.getRow() + 1).getPiece() == null) {
+                        moves.add(new Move(this, board.getTile((char) (tile.getColumn() - 2), tile.getRow() + 1), Move.MoveType.NORMAL));
+                    } else if (board.getTile((char) (tile.getColumn() - 2), tile.getRow() + 1).getPiece().getPlayerColor() != getPlayerColor()) {
+                        moves.add(new Move(this, board.getTile((char) (tile.getColumn() - 2), tile.getRow() + 1), Move.MoveType.ATTACK));
+                    }
+                }
+                if (tile.getRow() - 1 >= 1) {
+                    if (board.getTile((char) (tile.getColumn() - 2), tile.getRow() - 1).getPiece() == null) {
+                        moves.add(new Move(this, board.getTile((char) (tile.getColumn() - 2), tile.getRow() - 1), Move.MoveType.NORMAL));
+                    } else if (board.getTile((char) (tile.getColumn() - 2), tile.getRow() - 1).getPiece().getPlayerColor() != getPlayerColor()) {
+                        moves.add(new Move(this, board.getTile((char) (tile.getColumn() - 2), tile.getRow() - 1), Move.MoveType.ATTACK));
+                    }
+                }
+            }
+        }
+
+        this.legalMoves = moves;
     }
 
     @Override

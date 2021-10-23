@@ -57,6 +57,10 @@ public class Move {
         return ((Move) obj).getNewTile().equals(this.newTile) && ((Move) obj).getPiece().equals(this.piece);
     }
 
+    public boolean equals(Piece piece, Tile newTile) {
+        return this.getPiece() == piece && this.getNewTile() == newTile;
+    }
+
     @Override
     public int hashCode() {
         return super.hashCode() + 56;
