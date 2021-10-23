@@ -16,7 +16,53 @@ public class Bishop extends Piece {
 
     @Override
     public void calculateLegalMoves() {
-        this.legalMoves = new ArrayList<>();
+        ArrayList<Move> moves = new ArrayList<>();
+        
+        for (int i = 1; tile.getRow() + i <= 8 && tile.getColumn() + i <= 'h'; i++) {
+            if (board.getTile((char) (tile.getColumn() + i), tile.getRow() + i).getPiece() == null) {
+                moves.add(new Move(this, board.getTile((char) (tile.getColumn() + i), tile.getRow() + i), Move.MoveType.NORMAL));
+                continue;
+            } else if (board.getTile((char) (tile.getColumn() + i), tile.getRow() + i).getPiece().getPlayerColor() != getPlayerColor()) {
+                moves.add(new Move(this, board.getTile((char) (tile.getColumn() + i), tile.getRow() + i), Move.MoveType.ATTACK));
+                break;
+            }
+            break;
+        }
+
+        for (int i = 1; tile.getRow() + i <= 8 && tile.getColumn() - i >= 'a'; i++) {
+            if (board.getTile((char) (tile.getColumn() - i), tile.getRow() + i).getPiece() == null) {
+                moves.add(new Move(this, board.getTile((char) (tile.getColumn() - i), tile.getRow() + i), Move.MoveType.NORMAL));
+                continue;
+            } else if (board.getTile((char) (tile.getColumn() - i), tile.getRow() + i).getPiece().getPlayerColor() != getPlayerColor()) {
+                moves.add(new Move(this, board.getTile((char) (tile.getColumn() - i), tile.getRow() + i), Move.MoveType.ATTACK));
+                break;
+            }
+            break;
+        }
+
+        for (int i = 1; tile.getRow() - i >= 1 && tile.getColumn() + i <= 'h'; i++) {
+            if (board.getTile((char) (tile.getColumn() + i), tile.getRow() - i).getPiece() == null) {
+                moves.add(new Move(this, board.getTile((char) (tile.getColumn() + i), tile.getRow() - i), Move.MoveType.NORMAL));
+                continue;
+            } else if (board.getTile((char) (tile.getColumn() + i), tile.getRow() - i).getPiece().getPlayerColor() != getPlayerColor()) {
+                moves.add(new Move(this, board.getTile((char) (tile.getColumn() + i), tile.getRow() - i), Move.MoveType.ATTACK));
+                break;
+            }
+            break;
+        }
+
+        for (int i = 1; tile.getRow() - i >= 1 && tile.getColumn() - i >= 'a'; i++) {
+            if (board.getTile((char) (tile.getColumn() - i), tile.getRow() - i).getPiece() == null) {
+                moves.add(new Move(this, board.getTile((char) (tile.getColumn() - i), tile.getRow() - i), Move.MoveType.NORMAL));
+                continue;
+            } else if (board.getTile((char) (tile.getColumn() - i), tile.getRow() - i).getPiece().getPlayerColor() != getPlayerColor()) {
+                moves.add(new Move(this, board.getTile((char) (tile.getColumn() - i), tile.getRow() - i), Move.MoveType.ATTACK));
+                break;
+            }
+            break;
+        }
+        
+        this.legalMoves = moves;
     }
 
     @Override
