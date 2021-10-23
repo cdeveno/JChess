@@ -107,8 +107,10 @@ public abstract class Piece {
         board.getGc().clearRect(BoardUtils.calculateXCoord(tile.getColumn()), BoardUtils.calculateYCoord(tile.getRow()), BoardUtils.getTileSize(), BoardUtils.getTileSize());
         tile.paintTile(board.getGc());
         tile.setPiece(null);
-        setPosition(newTile);
+        board.getGc().clearRect(BoardUtils.calculateXCoord(newTile.getColumn()), BoardUtils.calculateYCoord(newTile.getRow()), BoardUtils.getTileSize(), BoardUtils.getTileSize());
+        newTile.paintTile(board.getGc());
         newTile.setPiece(this);
+        setPosition(newTile);
         render(board.getGc());
         game.addMove(getLegalMoves().get(getLegalMoves().indexOf(new Move(this, newTile))));
         for (Tile[] row : board.getBoard()) {

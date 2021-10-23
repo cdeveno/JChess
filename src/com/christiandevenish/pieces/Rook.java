@@ -16,7 +16,49 @@ public class Rook extends Piece {
 
     @Override
     public void calculateLegalMoves() {
-        this.legalMoves = new ArrayList<>();
+        ArrayList<Move> moves = new ArrayList<>();
+
+        for (int i = 1; tile.getRow() + i <= 8; i++) {
+            if (board.getTile(tile.getColumn(), tile.getRow() + i).getPiece() == null) {
+                moves.add(new Move(this, board.getTile(tile.getColumn(), tile.getRow() + i), Move.MoveType.NORMAL));
+            } else {
+                if (board.getTile(tile.getColumn(), tile.getRow() + i).getPiece().getPlayerColor() != getPlayerColor()) {
+                    moves.add(new Move(this, board.getTile(tile.getColumn(), tile.getRow() + i), Move.MoveType.ATTACK));
+                }
+                break;
+            }
+        }
+        for (int i = 1; tile.getRow() - i >= 1; i++) {
+            if (board.getTile(tile.getColumn(), tile.getRow() - i).getPiece() == null) {
+                moves.add(new Move(this, board.getTile(tile.getColumn(), tile.getRow() - i), Move.MoveType.NORMAL));
+            } else {
+                if (board.getTile(tile.getColumn(), tile.getRow() - i).getPiece().getPlayerColor() != getPlayerColor()) {
+                    moves.add(new Move(this, board.getTile(tile.getColumn(), tile.getRow() - i), Move.MoveType.ATTACK));
+                }
+                break;
+            }
+        }
+        for (int i = 1; tile.getColumn() + i <= 'h'; i++) {
+            if (board.getTile((char) (tile.getColumn() + i), tile.getRow()).getPiece() == null) {
+                moves.add(new Move(this, board.getTile((char) (tile.getColumn() + i), tile.getRow()), Move.MoveType.NORMAL));
+            } else {
+                if (board.getTile((char) (tile.getColumn() + i), tile.getRow()).getPiece().getPlayerColor() != getPlayerColor()) {
+                    moves.add(new Move(this, board.getTile((char) (tile.getColumn() + i), tile.getRow()), Move.MoveType.ATTACK));
+                }
+                break;
+            }
+        }
+        for (int i = 1; tile.getColumn() - i >= 'a'; i++) {
+            if (board.getTile((char) (tile.getColumn() - i), tile.getRow()).getPiece() == null) {
+                moves.add(new Move(this, board.getTile((char) (tile.getColumn() - i), tile.getRow()), Move.MoveType.NORMAL));
+            } else {
+                if (board.getTile((char) (tile.getColumn() - i), tile.getRow()).getPiece().getPlayerColor() != getPlayerColor()) {
+                    moves.add(new Move(this, board.getTile((char) (tile.getColumn() - i), tile.getRow()), Move.MoveType.ATTACK));
+                }
+                break;
+            }
+        }
+        this.legalMoves = moves;
     }
 
     @Override
