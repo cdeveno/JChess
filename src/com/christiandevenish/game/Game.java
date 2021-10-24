@@ -35,11 +35,24 @@ public class Game {
         moveList = new ArrayList<>();
     }
 
+    public void recalculateLegalMoves() {
+        for (Piece piece : whitePlayer.getPieces()) {
+            piece.calculateLegalMoves();
+        }
+        for (Piece piece : blackPlayer.getPieces()) {
+            piece.calculateLegalMoves();
+        }
+    }
+
     public void addMove(Move move) {
         moveList.add(move);
     }
 
     public List<Move> getMoveList() {
         return moveList;
+    }
+
+    public Player getOpposingPlayer(PlayerColor color) {
+        return color == PlayerColor.WHITE ? blackPlayer : whitePlayer;
     }
 }

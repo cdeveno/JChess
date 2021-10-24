@@ -27,6 +27,7 @@ public class Player {
     private ArrayList<Piece> createInitialPieces() {
         ArrayList<Piece> pieces = new ArrayList<>();
         if (playerColor == PlayerColor.WHITE) {
+            pieces.add(new King(board.getTile('e', 1), board, playerColor, game));
             for (int i = 0; i < 8; i++) {
                 pieces.add(new Pawn(board.getTile((char) ('a' + i), 2), board, playerColor, game));
             }
@@ -34,11 +35,11 @@ public class Player {
             pieces.add(new Knight(board.getTile('b', 1), board, playerColor, game));
             pieces.add(new Bishop(board.getTile('c', 1), board, playerColor, game));
             pieces.add(new Queen(board.getTile('d', 1), board, playerColor, game));
-            pieces.add(new King(board.getTile('e', 1), board, playerColor, game));
             pieces.add(new Bishop(board.getTile('f', 1), board, playerColor, game));
             pieces.add(new Knight(board.getTile('g', 1), board, playerColor, game));
             pieces.add(new Rook(board.getTile('h', 1), board, playerColor, game));
         } else {
+            pieces.add(new King(board.getTile('e', 8), board, playerColor, game));
             for (int i = 0; i < 8; i++) {
                 pieces.add(new Pawn(board.getTile((char) ('a' + i),7), board, playerColor, game));
             }
@@ -46,7 +47,6 @@ public class Player {
             pieces.add(new Knight(board.getTile('b', 8), board, playerColor, game));
             pieces.add(new Bishop(board.getTile('c', 8), board, playerColor, game));
             pieces.add(new Queen(board.getTile('d', 8), board, playerColor, game));
-            pieces.add(new King(board.getTile('e', 8), board, playerColor, game));
             pieces.add(new Bishop(board.getTile('f', 8), board, playerColor, game));
             pieces.add(new Knight(board.getTile('g', 8), board, playerColor, game));
             pieces.add(new Rook(board.getTile('h', 8), board, playerColor, game));
@@ -64,7 +64,8 @@ public class Player {
         return pieces;
     }
 
-    public void makeMove(Piece piece, Tile newTile) {
-
+    // King is always at index 0
+    public King getKing() {
+        return (King) pieces.get(0);
     }
 }

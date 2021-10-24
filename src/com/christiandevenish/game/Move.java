@@ -16,7 +16,9 @@ public class Move {
         NORMAL,
         EN_PASSANT,
         ATTACK,
-        PAWN_DOUBLE_MOVE
+        PAWN_DOUBLE_MOVE,
+        CASTLE_KINGSIDE,
+        CASTLE_QUEENSIDE
     }
 
     public Move(Piece piece, Tile newTile, MoveType moveType) {

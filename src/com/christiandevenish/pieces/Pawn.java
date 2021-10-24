@@ -146,13 +146,7 @@ public class Pawn extends Piece {
         newTile.setPiece(this);
         render(board.getGc());
         game.addMove(getLegalMoves().get(getLegalMoves().indexOf(new Move(this, newTile))));
-        for (Tile[] row : board.getBoard()) {
-            for (Tile tile : row) {
-                if (tile.getPiece() != null) {
-                    tile.getPiece().calculateLegalMoves();
-                }
-            }
-        }
+        game.recalculateLegalMoves();
         board.switchPlayerTurn();
     }
 }

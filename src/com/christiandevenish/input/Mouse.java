@@ -5,6 +5,7 @@ import com.christiandevenish.board.BoardUtils;
 import com.christiandevenish.board.Tile;
 import com.christiandevenish.game.Game;
 import com.christiandevenish.game.Move;
+import com.christiandevenish.pieces.King;
 import com.christiandevenish.pieces.Pawn;
 import com.christiandevenish.pieces.Piece;
 import javafx.event.EventHandler;
@@ -29,9 +30,18 @@ public class Mouse implements EventHandler<MouseEvent> {
             selectedPiece.renderWithMoves(board.getGc());
         } else if (selectedPiece != null) {
             if (selectedPiece.getLegalMoves().contains(new Move(selectedPiece, selectedTile))) {
-                if (selectedPiece.getLegalMoves().get(selectedPiece.getLegalMoves().indexOf(new Move(selectedPiece, selectedTile))).getMoveType() == Move.MoveType.EN_PASSANT) {
+                Move move = selectedPiece.getLegalMoves().get(selectedPiece.getLegalMoves().indexOf(new Move(selectedPiece, selectedTile)));
+                if (move.getMoveType() == Move.MoveType.EN_PASSANT) {
                     selectedPiece.undisplayMoves(board.getGc());
                     ((Pawn) selectedPiece).makeEnPassantMove(selectedTile);
+                    selectedPiece = null;
+                } else if (move.getMoveType() == Move.MoveType.CASTLE_KINGSIDE) {
+                    selectedPiece.undisplayMoves(board.getGc());
+                    ((King) selectedPiece).castleKingSide();
+                    selectedPiece = null;
+                } else if (move.getMoveType() == Move.MoveType.CASTLE_QUEENSIDE) {
+                    selectedPiece.undisplayMoves(board.getGc());
+                    ((King) selectedPiece).castleQueenSide();
                     selectedPiece = null;
                 } else {
                     selectedPiece.undisplayMoves(board.getGc());

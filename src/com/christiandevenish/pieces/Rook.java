@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 public class Rook extends Piece {
 
+    private boolean firstMove = true;
+
     public Rook(Tile tile, Board board, PlayerColor playerColor, Game game) {
         super(tile, board, playerColor, game);
     }
@@ -64,5 +66,21 @@ public class Rook extends Piece {
     @Override
     public String toString() {
         return "R";
+    }
+
+    @Override
+    public void makeMove(Tile newTile) {
+        if (firstMove) {
+            firstMove = false;
+        }
+        super.makeMove(newTile);
+    }
+
+    public boolean isFirstMove() {
+        return firstMove;
+    }
+
+    public void setFirstMove(boolean firstMove) {
+        this.firstMove = firstMove;
     }
 }

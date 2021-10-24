@@ -113,13 +113,21 @@ public abstract class Piece {
         setPosition(newTile);
         render(board.getGc());
         game.addMove(getLegalMoves().get(getLegalMoves().indexOf(new Move(this, newTile))));
-        for (Tile[] row : board.getBoard()) {
-            for (Tile tile : row) {
-                if (tile.getPiece() != null) {
-                    tile.getPiece().calculateLegalMoves();
+        game.recalculateLegalMoves();
+        board.switchPlayerTurn();
+    }
+
+    public ArrayList<Move> getAttackMoves() {
+        ArrayList<Move> moves = new ArrayList<>();
+
+        if (legalMoves != null) {
+            for (Move legalMove : legalMoves) {
+                if (legalMove.getMoveType() == Move.MoveType.ATTACK) {
+                    moves.add(legalMove);
                 }
             }
         }
-        board.switchPlayerTurn();
+
+        return moves;
     }
 }
