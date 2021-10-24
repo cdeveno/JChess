@@ -3,7 +3,6 @@ package com.christiandevenish.input;
 import com.christiandevenish.board.Board;
 import com.christiandevenish.board.BoardUtils;
 import com.christiandevenish.board.Tile;
-import com.christiandevenish.game.Game;
 import com.christiandevenish.game.Move;
 import com.christiandevenish.pieces.King;
 import com.christiandevenish.pieces.Pawn;

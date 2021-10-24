@@ -26,10 +26,10 @@ public class Game {
         blackPlayer.renderPieces(board.getGc());
 
         for (Piece piece : whitePlayer.getPieces()) {
-            piece.calculateLegalMoves();
+            piece.setLegalMoves(piece.calculatePseudoLegalMoves());
         }
         for (Piece piece : blackPlayer.getPieces()) {
-            piece.calculateLegalMoves();
+            piece.setLegalMoves(piece.calculatePseudoLegalMoves());
         }
 
         moveList = new ArrayList<>();
@@ -37,10 +37,16 @@ public class Game {
 
     public void recalculateLegalMoves() {
         for (Piece piece : whitePlayer.getPieces()) {
-            piece.calculateLegalMoves();
+            piece.setLegalMoves(piece.calculatePseudoLegalMoves());
+            if (piece.hasKingCheck()) {
+                blackPlayer.getKing().setInCheck(true);
+            }
         }
         for (Piece piece : blackPlayer.getPieces()) {
-            piece.calculateLegalMoves();
+            piece.setLegalMoves(piece.calculatePseudoLegalMoves());
+            if (piece.hasKingCheck()) {
+                whitePlayer.getKing().setInCheck(true);
+            }
         }
     }
 

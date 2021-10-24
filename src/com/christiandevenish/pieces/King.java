@@ -12,13 +12,14 @@ import java.util.ArrayList;
 public class King extends Piece {
 
     private boolean firstMove = true;
+    private boolean inCheck = false;
 
     public King(Tile tile, Board board, PlayerColor playerColor, Game game) {
         super(tile, board, playerColor, game);
     }
 
     @Override
-    public void calculateLegalMoves() {
+    public ArrayList<Move> calculatePseudoLegalMoves() {
         ArrayList<Move> moves = new ArrayList<>();
 
         if (tile.getRow() + 1 <= 8) {
@@ -79,11 +80,11 @@ public class King extends Piece {
             }
         }
 
-        this.legalMoves = moves;
-
         if (firstMove) {
-            legalMoves.addAll(calculateCastling());
+            moves.addAll(calculateCastling());
         }
+
+        return moves;
     }
 
     @Override
@@ -197,5 +198,13 @@ public class King extends Piece {
         game.addMove(getLegalMoves().get(getLegalMoves().indexOf(new Move(this, tile))));
         game.recalculateLegalMoves();
         board.switchPlayerTurn();
+    }
+
+    public boolean isInCheck() {
+        return inCheck;
+    }
+
+    public void setInCheck(boolean inCheck) {
+        this.inCheck = inCheck;
     }
 }

@@ -15,7 +15,7 @@ public class Knight extends Piece {
     }
 
     @Override
-    public void calculateLegalMoves() {
+    public ArrayList<Move> calculatePseudoLegalMoves() {
         ArrayList<Move> moves = new ArrayList<>();
 
         if (tile.getRow() + 2 <= 8) {
@@ -84,7 +84,7 @@ public class Knight extends Piece {
             }
         }
 
-        this.legalMoves = moves;
+        return moves;
     }
 
     @Override

@@ -59,7 +59,7 @@ public abstract class Piece {
         tile.setPiece(this);
     }
 
-    public abstract void calculateLegalMoves();
+    public abstract ArrayList<Move> calculatePseudoLegalMoves();
 
     public void setPosition(Tile tile) {
         this.tile = tile;
@@ -76,6 +76,19 @@ public abstract class Piece {
 
     public ArrayList<Move> getLegalMoves() {
         return legalMoves;
+    }
+
+    public void setLegalMoves(ArrayList<Move> legalMoves) {
+        this.legalMoves = legalMoves;
+    }
+
+    public boolean hasKingCheck() {
+        for (Move move : legalMoves) {
+            if (move.getNewTile() == game.getOpposingPlayer(playerColor).getKing().getTile()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public PlayerColor getPlayerColor() {
@@ -115,19 +128,5 @@ public abstract class Piece {
         game.addMove(getLegalMoves().get(getLegalMoves().indexOf(new Move(this, newTile))));
         game.recalculateLegalMoves();
         board.switchPlayerTurn();
-    }
-
-    public ArrayList<Move> getAttackMoves() {
-        ArrayList<Move> moves = new ArrayList<>();
-
-        if (legalMoves != null) {
-            for (Move legalMove : legalMoves) {
-                if (legalMove.getMoveType() == Move.MoveType.ATTACK) {
-                    moves.add(legalMove);
-                }
-            }
-        }
-
-        return moves;
     }
 }

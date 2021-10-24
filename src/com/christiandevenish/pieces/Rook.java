@@ -17,7 +17,7 @@ public class Rook extends Piece {
     }
 
     @Override
-    public void calculateLegalMoves() {
+    public ArrayList<Move> calculatePseudoLegalMoves() {
         ArrayList<Move> moves = new ArrayList<>();
 
         for (int i = 1; tile.getRow() + i <= 8; i++) {
@@ -60,7 +60,8 @@ public class Rook extends Piece {
                 break;
             }
         }
-        this.legalMoves = moves;
+
+        return moves;
     }
 
     @Override

@@ -15,7 +15,7 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public void calculateLegalMoves() {
+    public ArrayList<Move> calculatePseudoLegalMoves() {
         ArrayList<Move> moves = new ArrayList<>();
         
         for (int i = 1; tile.getRow() + i <= 8 && tile.getColumn() + i <= 'h'; i++) {
@@ -62,7 +62,7 @@ public class Bishop extends Piece {
             break;
         }
         
-        this.legalMoves = moves;
+        return moves;
     }
 
     @Override

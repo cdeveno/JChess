@@ -18,7 +18,7 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public void calculateLegalMoves() {
+    public ArrayList<Move> calculatePseudoLegalMoves() {
         ArrayList<Move> moves = new ArrayList<>();
         if (playerColor == PlayerColor.WHITE) {
             if (firstMove) {
@@ -113,7 +113,8 @@ public class Pawn extends Piece {
                 }
             }
         }
-        this.legalMoves = moves;
+
+        return moves;
     }
 
     @Override

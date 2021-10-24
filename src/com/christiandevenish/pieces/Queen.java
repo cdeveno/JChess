@@ -15,13 +15,13 @@ public class Queen extends Piece {
     }
 
     @Override
-    public void calculateLegalMoves() {
+    public ArrayList<Move> calculatePseudoLegalMoves() {
         ArrayList<Move> moves = new ArrayList<>();
 
         moves.addAll(calculateStraightMovement());
         moves.addAll(calculateBishopMovement());
 
-        this.legalMoves = moves;
+        return moves;
     }
 
     private ArrayList<Move> calculateStraightMovement() {
