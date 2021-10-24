@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class King extends Piece {
 
     private boolean firstMove = true;
+    private boolean inCheck = false;
 
     public King(Tile tile, Board board, PlayerColor playerColor, Game game) {
         super(tile, board, playerColor, game);
@@ -197,5 +198,13 @@ public class King extends Piece {
         game.addMove(getLegalMoves().get(getLegalMoves().indexOf(new Move(this, tile))));
         game.recalculateLegalMoves();
         board.switchPlayerTurn();
+    }
+
+    public boolean isInCheck() {
+        return inCheck;
+    }
+
+    public void setInCheck(boolean inCheck) {
+        this.inCheck = inCheck;
     }
 }

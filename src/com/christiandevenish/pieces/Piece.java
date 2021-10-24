@@ -116,18 +116,4 @@ public abstract class Piece {
         game.recalculateLegalMoves();
         board.switchPlayerTurn();
     }
-
-    public ArrayList<Move> getAttackMoves() {
-        ArrayList<Move> moves = new ArrayList<>();
-
-        if (legalMoves != null) {
-            for (Move legalMove : legalMoves) {
-                if (legalMove.getMoveType() == Move.MoveType.ATTACK) {
-                    moves.add(legalMove);
-                }
-            }
-        }
-
-        return moves;
-    }
 }
