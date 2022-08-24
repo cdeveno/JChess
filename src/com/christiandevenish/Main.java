@@ -26,7 +26,7 @@ public class Main extends Application {
         stage.setScene(scene);
 
         Board board = new Board(root, boardLength);
-        Game game = new Game(board);
+        new Game(board);
 
         stage.show();
     }

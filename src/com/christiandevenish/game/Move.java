@@ -47,7 +47,7 @@ public class Move {
 
     public void render(GraphicsContext gc) {
         gc.setFill(Color.FUCHSIA);
-        gc.fillOval(BoardUtils.calculateXCoord(newTile.getColumn()) + (BoardUtils.getTileSize() / 2.0), BoardUtils.calculateYCoord(newTile.getRow()) + (BoardUtils.getTileSize() / 2.0), 20.0, 20.0);
+        gc.fillOval(BoardUtils.calculateXCoord(newTile.getColumn()) + (BoardUtils.getTileSize() / 2.0) - 10, BoardUtils.calculateYCoord(newTile.getRow()) + (BoardUtils.getTileSize() / 2.0) - 10, 20.0, 20.0);
     }
 
     @Override

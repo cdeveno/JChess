@@ -61,6 +61,14 @@ public abstract class Piece {
 
     public abstract ArrayList<Move> calculatePseudoLegalMoves();
 
+    public ArrayList<Move> calculateLegalMoves() {
+        ArrayList<Move> moves = this.legalMoves;
+
+
+
+        return moves;
+    }
+
     public void setPosition(Tile tile) {
         this.tile = tile;
     }
@@ -128,5 +136,9 @@ public abstract class Piece {
         game.addMove(getLegalMoves().get(getLegalMoves().indexOf(new Move(this, newTile))));
         game.recalculateLegalMoves();
         board.switchPlayerTurn();
+    }
+
+    public void makeTheoreticalMove() {
+        
     }
 }

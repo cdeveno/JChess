@@ -11,7 +11,7 @@ public class Sprite {
         this.image = image;
     }
 
-    public void render(GraphicsContext gc, int x, int y) {
+    public void render(GraphicsContext gc, double x, double y) {
         gc.drawImage(image, x, y);
     }
 }

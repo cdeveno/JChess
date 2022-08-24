@@ -20,7 +20,6 @@ public class Mouse implements EventHandler<MouseEvent> {
         this.board = board;
     }
 
-    //TODO restrict making moves to player turn
     @Override
     public void handle(MouseEvent mouseEvent) {
         Tile selectedTile = board.getTile(BoardUtils.xCoordToColumn(mouseEvent.getX()), BoardUtils.yCoordToRow(mouseEvent.getY()));
